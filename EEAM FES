@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche d'Accueil — EEEM Fès</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:rgba(201,168,76,0.18);
+  --navy:#0A1628;--navy-mid:#122040;--navy-card:#162848;--navy-input:#0E1C36;
+  --text-light:#E8EAF0;--text-muted:#8A9BBF;
+  --radius:10px;--error:#E05252;--success:#4CAF8A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--navy);min-height:100vh;color:var(--text-light);padding-top:56px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 10% 0%,rgba(201,168,76,0.09) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 90% 100%,rgba(42,65,112,0.6) 0%,transparent 70%);pointer-events:none;z-index:0;}
+
+/* LANG BAR */
+#lang-bar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(10,22,40,0.97);border-bottom:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;padding:0 12px;gap:5px;z-index:200;backdrop-filter:blur(12px);flex-wrap:wrap;}
+.lang-btn{background:none;border:1px solid rgba(201,168,76,0.3);color:var(--gold-light);font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:.06em;padding:4px 10px;border-radius:20px;cursor:pointer;transition:all .2s;}
+.lang-btn:hover,.lang-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+
+/* WRAPPER */
+.wrapper{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:28px 16px 80px;}
+
+/* HEADER */
+.header-card{background:linear-gradient(135deg,var(--navy-card) 0%,var(--navy-mid) 100%);border:1px solid var(--gold-dim);border-radius:16px;padding:32px 28px 24px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden;animation:fadeUp .6s ease both;}
+.header-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.logo-img{width:120px;height:120px;object-fit:contain;margin-bottom:14px;}
+.church-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--gold);letter-spacing:.03em;line-height:1.3;margin-bottom:5px;}
+.church-sub{font-size:12px;color:var(--text-muted);font-weight:300;letter-spacing:.05em;margin-bottom:14px;}
+.church-tel{font-size:13px;color:var(--gold-light);font-weight:400;margin-bottom:14px;letter-spacing:.04em;}
+.welcome-text{font-size:13.5px;color:var(--text-light);line-height:1.7;font-weight:300;border-top:1px solid var(--gold-dim);padding-top:14px;font-style:italic;font-family:'Cormorant Garamond',serif;}
+
+/* DATE ROW */
+.date-row{margin-bottom:20px;animation:fadeUp .6s .1s ease both;}
+
+/* SECTION */
+.section{background:var(--navy-card);border:1px solid rgba(201,168,76,0.12);border-radius:var(--radius);padding:22px 20px 18px;margin-bottom:16px;animation:fadeUp .6s ease both;}
+.section-title{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);}
+
+/* FIELDS */
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+label{display:block;font-size:11.5px;font-weight:500;color:var(--gold-light);letter-spacing:.05em;margin-bottom:5px;}
+label .req{color:var(--gold);margin-left:2px;}
+input[type=text],input[type=tel],input[type=date],select,textarea{width:100%;background:var(--navy-input);border:1px solid rgba(201,168,76,0.2);border-radius:8px;color:var(--text-light);font-family:'Jost',sans-serif;font-size:14px;font-weight:300;padding:10px 13px;transition:border-color .2s,box-shadow .2s;outline:none;-webkit-appearance:none;appearance:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;}
+select option{background:var(--navy-mid);color:var(--text-light);}
+textarea{resize:vertical;min-height:72px;}
+input::placeholder,textarea::placeholder{color:var(--text-muted);font-weight:300;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* RADIO */
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+.radio-label{display:flex;align-items:center;gap:7px;background:var(--navy-input);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:8px 13px;cursor:pointer;transition:all .2s;font-size:13px;color:var(--text-light);font-weight:400;}
+.radio-label:hover{border-color:var(--gold);background:rgba(201,168,76,0.05);}
+.radio-label input{display:none;}
+.radio-label.selected{border-color:var(--gold);background:rgba(201,168,76,0.12);color:var(--gold-light);}
+.radio-dot{width:15px;height:15px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.4);background:transparent;transition:all .2s;flex-shrink:0;}
+.radio-label.selected .radio-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.15);}
+
+/* CONDITIONAL */
+.conditional{display:none;margin-top:12px;padding:12px;background:rgba(201,168,76,0.04);border:1px solid var(--gold-dim);border-radius:8px;}
+.conditional.show{display:block;animation:fadeIn .3s ease;}
+
+/* ERRORS */
+.field-error{font-size:11px;color:var(--error);margin-top:4px;display:none;}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--error);}
+.field.invalid .field-error{display:block;}
+
+/* SUBMIT */
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--gold) 0%,#A07830 100%);color:var(--navy);font-family:'Jost',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:none;border-radius:10px;padding:15px 32px;cursor:pointer;transition:all .25s;margin-top:8px;box-shadow:0 4px 20px rgba(201,168,76,0.25);}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(201,168,76,0.35);}
+.submit-btn:active{transform:translateY(0);}
+
+/* SPINNER */
+.submit-btn.loading{opacity:.7;pointer-events:none;}
+
+/* SUCCESS */
+#success-screen{display:none;position:fixed;inset:0;z-index:300;background:var(--navy);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
+#success-screen.show{display:flex;}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(76,175,138,0.15);border:2px solid var(--success);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:24px;animation:popIn .4s cubic-bezier(0.34,1.56,0.64,1);}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);margin-bottom:12px;}
+.success-sub{font-size:15px;color:var(--text-muted);line-height:1.7;max-width:320px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes popIn{from{transform:scale(0.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+.section:nth-child(1){animation-delay:.05s;}.section:nth-child(2){animation-delay:.10s;}.section:nth-child(3){animation-delay:.15s;}.section:nth-child(4){animation-delay:.20s;}
+@media(max-width:500px){.grid-2{grid-template-columns:1fr;}.header-card{padding:24px 14px 18px;}.section{padding:18px 14px 14px;}}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div id="lang-bar">
+  <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  <button class="lang-btn" onclick="setLang('ar')">عربية</button>
+  <button class="lang-btn" onclick="setLang('ln')">Lingala</button>
+</div>
+
+<!-- SUCCESS -->
+<div id="success-screen">
+  <div class="success-icon">✓</div>
+  <div class="success-title" id="success-title">Merci !</div>
+  <div class="success-sub" id="success-sub">Votre fiche a bien été enregistrée.<br>Bienvenue parmi nous 🙏</div>
+</div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header-card">
+    <img class="logo-img" id="church-logo" src="" alt="EEEM Fès">
+    <div class="church-name" id="txt-name">Église Évangélique au Maroc</div>
+    <div class="church-sub" id="txt-sub">Paroisse de Fès</div>
+    <div class="church-tel">📞 +212 75 464 6086</div>
+    <div class="welcome-text" id="txt-welcome">L'Église Évangélique au Maroc, Paroisse de Fès, vous accueille chaleureusement.<br>Pour mieux vous servir et vous accompagner dans votre croissance spirituelle,<br>merci de remplir cette fiche.</div>
+  </div>
+
+  <form id="main-form" novalidate>
+
+    <!-- DATE -->
+    <div class="date-row">
+      <div class="field" id="f-date">
+        <label id="lbl-date">Date du jour <span class="req">*</span></label>
+        <input type="date" name="date" id="inp-date" required>
+        <div class="field-error">Champ requis</div>
+      </div>
+    </div>
+
+    <!-- IDENTITÉ -->
+    <div class="section">
+      <div class="section-title" id="ttl-identity">Identité</div>
+
+      <div class="grid-2">
+        <div class="field" id="f-nom">
+          <label id="lbl-nom">Nom <span class="req">*</span></label>
+          <input type="text" name="nom" id="inp-nom" placeholder="Nom de famille" required>
+          <div class="field-error">Requis</div>
+        </div>
+        <div class="field" id="f-prenom">
+          <label id="lbl-prenom">Prénom <span class="req">*</span></label>
+          <input type="text" name="prenom" id="inp-prenom" placeholder="Prénom" required>
+          <div class="field-error">Requis</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field" id="f-sexe">
+          <label id="lbl-sexe">Sexe <span class="req">*</span></label>
+          <select name="sexe" id="inp-sexe" required>
+            <option value="" id="o-sx0">— Choisir —</option>
+            <option value="homme" id="o-sx1">Homme</option>
+            <option value="femme" id="o-sx2">Femme</option>
+          </select>
+          <div class="field-error">Requis</div>
+        </div>
+        <div class="field" id="f-nationalite">
+          <label id="lbl-nationalite">Nationalité <span class="req">*</span></label>
+          <input type="text" name="nationalite" id="inp-nationalite" placeholder="ex: Ivoirienne" required>
+          <div class="field-error">Requis</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field" id="f-tel">
+          <label id="lbl-tel">Téléphone <span class="req">*</span></label>
+          <input type="tel" name="telephone" id="inp-tel" placeholder="+212 6xx xxx xxx" required>
+          <div class="field-error">Requis</div>
+        </div>
+        <div class="field" id="f-quartier">
+          <label id="lbl-quartier">Quartier</label>
+          <input type="text" name="quartier" id="inp-quartier" placeholder="Quartier / Zone">
+        </div>
+      </div>
+    </div>
+
+    <!-- SPIRITUEL -->
+    <div class="section">
+      <div class="section-title" id="ttl-spiritual">Parcours spirituel</div>
+
+      <div class="field" id="f-baptise">
+        <label id="lbl-baptise">Êtes-vous déjà baptisé(e) ? <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="sel(this,'baptise')">
+            <input type="radio" name="baptise" value="oui"><div class="radio-dot"></div><span id="o-bap-y">Oui</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'baptise')">
+            <input type="radio" name="baptise" value="non"><div class="radio-dot"></div><span id="o-bap-n">Non</span>
+          </label>
+        </div>
+        <div class="field-error">Veuillez répondre</div>
+      </div>
+
+      <div class="field" style="margin-top:16px;" id="f-service">
+        <label id="lbl-service">Servez-vous déjà dans votre pays ou au Maroc ? <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="sel(this,'service');show('cond-service')">
+            <input type="radio" name="service" value="oui"><div class="radio-dot"></div><span id="o-srv-y">Oui</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'service');hide('cond-service')">
+            <input type="radio" name="service" value="non"><div class="radio-dot"></div><span id="o-srv-n">Non</span>
+          </label>
+        </div>
+        <div class="field-error">Veuillez répondre</div>
+        <div class="conditional" id="cond-service">
+          <label id="lbl-serviceLequel">Si oui, lequel ?</label>
+          <input type="text" name="serviceLequel" id="inp-serviceLequel" placeholder="ex: Chorale, Enseignement, Intercession...">
+        </div>
+      </div>
+    </div>
+
+    <!-- SÉJOUR -->
+    <div class="section">
+      <div class="section-title" id="ttl-sejour">Séjour au Maroc</div>
+
+      <div class="field" id="f-duree">
+        <label id="lbl-duree">Combien de temps pensez-vous rester au Maroc ? <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="sel(this,'duree');hide('cond-duree-autre')">
+            <input type="radio" name="duree" value="3ans"><div class="radio-dot"></div><span id="o-dur-3">3 ans</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'duree');hide('cond-duree-autre')">
+            <input type="radio" name="duree" value="5ans"><div class="radio-dot"></div><span id="o-dur-5">5 ans</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'duree');show('cond-duree-autre')">
+            <input type="radio" name="duree" value="autre"><div class="radio-dot"></div><span id="o-dur-a">Autre</span>
+          </label>
+        </div>
+        <div class="field-error">Veuillez répondre</div>
+        <div class="conditional" id="cond-duree-autre">
+          <label id="lbl-dureeAutre">Précisez la durée</label>
+          <input type="text" name="dureeAutre" id="inp-dureeAutre" placeholder="ex: 6 mois, 1 an...">
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:16px;" id="f-raison">
+        <label id="lbl-raison">Raison de votre arrivée au Maroc <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label" onclick="sel(this,'raison');show('cond-etudes');hide('cond-autre-raison')">
+            <input type="radio" name="raison" value="etudes"><div class="radio-dot"></div><span id="o-r-et">Études</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'raison');hide('cond-etudes');hide('cond-autre-raison')">
+            <input type="radio" name="raison" value="travail"><div class="radio-dot"></div><span id="o-r-tr">Travail</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'raison');hide('cond-etudes');hide('cond-autre-raison')">
+            <input type="radio" name="raison" value="entrepreneuriat"><div class="radio-dot"></div><span id="o-r-en">Entrepreneuriat</span>
+          </label>
+          <label class="radio-label" onclick="sel(this,'raison');hide('cond-etudes');show('cond-autre-raison')">
+            <input type="radio" name="raison" value="autre"><div class="radio-dot"></div><span id="o-r-au">Autre</span>
+          </label>
+        </div>
+        <div class="field-error">Veuillez répondre</div>
+        <div class="conditional" id="cond-etudes">
+          <label id="lbl-ecole">Quelle école / université ?</label>
+          <input type="text" name="ecole" id="inp-ecole" placeholder="Nom de l'établissement">
+        </div>
+        <div class="conditional" id="cond-autre-raison">
+          <label id="lbl-autreRaison">Précisez</label>
+          <input type="text" name="autreRaison" id="inp-autreRaison" placeholder="Votre raison...">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="btn-submit">✦ Enregistrer ma fiche</button>
+
+  </form>
+</div>
+
+<script>
+// ── LOGO EMBARQUÉ ──
+document.getElementById('church-logo').src='data:image/jpeg;base64,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
